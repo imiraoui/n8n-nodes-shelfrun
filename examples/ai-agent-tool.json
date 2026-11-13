@@ -1,0 +1,103 @@
+{
+  "name": "ShelfRun AI tool example",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Use the connected ShelfRun tool once to scan the store URL supplied in this prompt, then summarize the returned products. Ask for the store URL if it is missing."
+      },
+      "id": "agent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        250
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "quickscan",
+        "url": "={{ $fromAI('store_url', 'HTTPS URL of the store to scan', 'string') }}",
+        "limit": 50
+      },
+      "id": "service-node",
+      "name": "ShelfRun",
+      "type": "n8n-nodes-shelfrun.shelfRunTool",
+      "typeVersion": 1,
+      "position": [
+        620,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "id": "model",
+      "name": "Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        340,
+        500
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "When clicking Execute workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        250
+      ]
+    }
+  ],
+  "connections": {
+    "Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking Execute workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ShelfRun": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {}
+}

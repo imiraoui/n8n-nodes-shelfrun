@@ -1,0 +1,58 @@
+{
+  "name": "n8n-nodes-shelfrun",
+  "version": "0.1.0",
+  "description": "Scan stores, extract product inventories, and track product changes in n8n",
+  "license": "MIT",
+  "homepage": "https://shelfrun.com",
+  "keywords": [
+    "n8n-community-node-package",
+    "shelfrun"
+  ],
+  "author": {
+    "name": "ShelfRun",
+    "url": "https://shelfrun.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imiraoui/n8n-nodes-shelfrun.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imiraoui/n8n-nodes-shelfrun/issues"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "test": "node --test test/*.test.cjs",
+    "prepublishOnly": "npm run lint && npm run build && npm test",
+    "lint:code": "eslint nodes credentials"
+  },
+  "files": [
+    "dist",
+    "examples"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/ShelfRunApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/ShelfRun/ShelfRun.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.56.4",
+    "n8n-workflow": "2.16.0",
+    "typescript": "5.9.3",
+    "eslint": "9.39.4",
+    "prettier": "3.8.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "engines": {
+    "node": ">=22.16"
+  }
+}

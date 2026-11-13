@@ -1,0 +1,15 @@
+{
+  "node": "n8n-nodes-shelfrun.shelfRun",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": [
+    "Miscellaneous"
+  ],
+  "resources": {
+    "primaryDocumentation": [
+      {
+        "url": "https://shelfrun.com/docs"
+      }
+    ]
+  }
+}

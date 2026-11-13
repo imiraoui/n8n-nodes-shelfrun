@@ -1,0 +1,49 @@
+{
+  "name": "ShelfRun basic example",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "When clicking Execute workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "listStores",
+        "limit": 50,
+        "offset": 0
+      },
+      "id": "service-node",
+      "name": "ShelfRun",
+      "type": "n8n-nodes-shelfrun.shelfRun",
+      "typeVersion": 1,
+      "position": [
+        560,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking Execute workflow": {
+      "main": [
+        [
+          {
+            "node": "ShelfRun",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {}
+}
